@@ -41,10 +41,10 @@ public class Room {
     @Column(name = "roomID")
     private int roomID ;
 
-    @ManyToOne
-    @JoinColumn(name = "building_ID", nullable = false)
-    @JsonBackReference
-    private Building buildingID;
+    // @ManyToOne
+    // @JoinColumn(name = "building_ID", nullable = false)
+    // @JsonBackReference
+    private int buildingID;
 
     @Column(name = "roomNo")
     private String roomNo;
