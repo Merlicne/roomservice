@@ -2,9 +2,6 @@ package com.example.demo.model;
 
 import java.time.LocalDateTime;
 
-import com.example.demo.entity.Furniture;
-import com.example.demo.entity.Room;
-
 import lombok.Builder;
 import lombok.Data;
 

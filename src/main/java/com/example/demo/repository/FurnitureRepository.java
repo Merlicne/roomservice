@@ -11,12 +11,12 @@ import com.example.demo.entity.Furniture;
 @Repository
 public interface FurnitureRepository extends JpaRepository<Furniture, Integer> {
     // find all furniture which deletedAt is null
-    // @Query(value = "SELECT * FROM furniture WHERE deleted_at IS NULL", nativeQuery = true)
-    // public Iterable<Furniture> findFurAll();
+    @Query(value = "SELECT * FROM furniture WHERE deleted_at IS NULL", nativeQuery = true)
+    public Iterable<Furniture> findFurAll();
 
-    // // find by furniture id which deletedAt is null
-    // @Query(value = "SELECT * FROM furniture WHERE id = ?1 AND deleted_at IS NULL", nativeQuery = true)
-    // public Optional<Furniture> findById(int id);
+    // find by furniture id which deletedAt is null
+    @Query(value = "SELECT * FROM furniture WHERE id = ?1 AND deleted_at IS NULL", nativeQuery = true)
+    public Optional<Furniture> findById(int id);
 
     
 }

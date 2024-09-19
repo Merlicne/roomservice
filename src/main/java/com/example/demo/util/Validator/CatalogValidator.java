@@ -1,6 +1,6 @@
 package com.example.demo.util.Validator;
 
-import com.example.demo.entity.Furniture;
+// import com.example.demo.entity.Furniture;
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.CatalogRequest;
 import com.example.demo.repository.FurnitureRepository;
@@ -19,20 +19,16 @@ public class CatalogValidator {
         }
     }
 
-    public void validateRoomId(CatalogRequest catalog) {
+    public static void validateRoomId(CatalogRequest catalog) {
         if (catalog.getRoomID() == 0) {
             throw new BadRequestException("Room ID cannot be empty");
-        } else {
-            roomRepository.findById(catalog.getRoomID()).orElseThrow(() -> new BadRequestException("Room ID not found"));
-        }
+        } 
     }
 
-    public void validateFurnitureId(CatalogRequest catalog) {
+    public static void validateFurnitureId(CatalogRequest catalog) {
         if (catalog.getFurnitureID() == 0) {
             throw new BadRequestException("Furniture ID cannot be empty");
-        } else {
-            furnitureRepository.findById(catalog.getFurnitureID()).orElseThrow(() -> new BadRequestException("Furniture ID not found"));
-        }
+        } 
     }
 
     public static void validateQuantity(CatalogRequest catalog) {
@@ -41,8 +37,8 @@ public class CatalogValidator {
         }
     }
 
-    public void validateCatalog(CatalogRequest catalog) {
-        // validateid(catalog);
+    public static void validateCatalog(CatalogRequest catalog) {
+        
         validateRoomId(catalog);
         validateFurnitureId(catalog);
         validateQuantity(catalog);

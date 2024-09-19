@@ -1,20 +1,22 @@
 package com.example.demo.util.converter;
 
-import java.util.ArrayList;
-import java.util.List;
+// import java.util.ArrayList;
+// import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
+// import org.springframework.beans.factory.annotation.Autowired;
+// 
 import com.example.demo.entity.Catalog;
 import com.example.demo.entity.Furniture;
 import com.example.demo.entity.Room;
-import com.example.demo.exception.NotFoundException;
+// import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.CatalogRequest;
 import com.example.demo.model.CatalogResponse;
-import com.example.demo.repository.FurnitureRepository;
-import com.example.demo.repository.RoomRepository;
+import com.example.demo.model.FurnitureModel;
+import com.example.demo.model.RoomModel;
+// import com.example.demo.repository.FurnitureRepository;
+// import com.example.demo.repository.RoomRepository;
 
-import lombok.RequiredArgsConstructor;
+// import lombok.RequiredArgsConstructor;
 
 // @RequiredArgsConstructor
 public class CatalogConverter {
@@ -36,11 +38,16 @@ public class CatalogConverter {
     public static CatalogResponse toModel(Catalog catalog, Room room, Furniture furniture) {
         return CatalogResponse.builder()
                 .id(catalog.getId())
-                .room(CatalogResponse.Room.builder()
-                        .id(room.getRoomID())
+                .room(RoomModel.builder()
+                        .roomID(room.getRoomID())
                         .roomNo(room.getRoomNo())
+                        .roomPrice(room.getRoomPrice())
                         .build())
-                .furniture(CatalogResponse.Furniture.builder()
+                // .room(CatalogResponse.Room.builder()
+                //         .id(room.getRoomID())
+                //         .roomNo(room.getRoomNo())
+                //         .build())
+                .furniture(FurnitureModel.builder()
                         .id(furniture.getFurID())
                         .name(furniture.getName())
                         .build())
