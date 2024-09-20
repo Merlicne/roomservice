@@ -10,4 +10,6 @@ public class AppConfig {
     public WebClient webClient(WebClient.Builder builder) {
         return builder.baseUrl("lb://dorm-service/api/v1").build();
     }
+
+    
 }
