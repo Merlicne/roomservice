@@ -1,22 +1,12 @@
 package com.example.demo.util.converter;
 
-// import java.util.ArrayList;
-// import java.util.List;
-
-// import org.springframework.beans.factory.annotation.Autowired;
-// 
 import com.example.demo.entity.Catalog;
 import com.example.demo.entity.Furniture;
 import com.example.demo.entity.Room;
-// import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.CatalogRequest;
 import com.example.demo.model.CatalogResponse;
 import com.example.demo.model.FurnitureModel;
 import com.example.demo.model.RoomModel;
-// import com.example.demo.repository.FurnitureRepository;
-// import com.example.demo.repository.RoomRepository;
-
-// import lombok.RequiredArgsConstructor;
 
 // @RequiredArgsConstructor
 public class CatalogConverter {

@@ -3,8 +3,9 @@ package com.example.demo.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-// import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -35,7 +36,7 @@ import com.example.demo.repository.RoomRepository;
 import com.example.demo.service.implement.CatalogService;
 
 @ExtendWith(MockitoExtension.class)
-public class CatalogServiceTest {
+class CatalogServiceTest {
     @Mock
     private CatalogRepository catalogRepository;
 
@@ -62,28 +63,28 @@ public class CatalogServiceTest {
     @BeforeEach
     void setUp() {
         catalog = Catalog.builder()
-            .id(0)
-            .roomID(0)
-            .furnitureID(0)
+            .id(1)
+            .roomID(1)
+            .furnitureID(1)
             .quantity(1)
             .createdAt(null)
             .build();
         
         catalogRequest = CatalogRequest.builder()
-            .roomID(0)
-            .furnitureID(0)
+            .roomID(1)
+            .furnitureID(1)
             .quantity(1)
             .build();
 
         catalogResponse = CatalogResponse.builder()
-            .id(0)
+            .id(1)
             .room(RoomModel.builder()
-                .roomID(0)
+                .roomID(1)
                 .roomNo("0")
                 .roomPrice(0)
                 .build())
             .furniture(FurnitureModel.builder()
-                .id(0)
+                .id(1)
                 .name("0")
                 .build())
             .quantity(1)
@@ -91,13 +92,13 @@ public class CatalogServiceTest {
             .build();
 
         room = Room.builder()
-            .roomID(0)
+            .roomID(1)
             .roomNo("0")
             .roomPrice(0)
             .build();
         
         furniture = Furniture.builder()
-            .furID(0)
+            .furID(1)
             .name("0")
             .build();
         
@@ -108,29 +109,29 @@ public class CatalogServiceTest {
 
     @Test
     void createCatalogTest() {
-        when(jwtService.extractRole(token.getToken())).thenReturn(Role.ADMIN);
 
-        when(roomRepository.findById(0)).thenReturn(Optional.of(room));
-        when(furnitureRepository.findById(0)).thenReturn(Optional.of(furniture));
-        when(catalogRepository.save(catalog)).thenReturn(catalog);
+        when(jwtService.extractRole(token.getToken())).thenReturn(Role.ADMIN);
+        when(roomRepository.findById(room.getRoomID())).thenReturn(Optional.of(room));
+        when(furnitureRepository.findById(furniture.getFurID())).thenReturn(Optional.of(furniture));
+        when(catalogRepository.save(any(Catalog.class))).thenReturn(catalog);
 
         CatalogResponse result = catalogService.createCatalog(catalogRequest, token);
 
         assertNotNull(result);
         assertEquals(catalogResponse, result);
 
-        verify(roomRepository).findById(0);
-        verify(furnitureRepository).findById(0);
-        verify(catalogRepository).save(catalog);
+        verify(roomRepository).findById(room.getRoomID());
+        verify(furnitureRepository).findById(furniture.getFurID());
+        verify(catalogRepository).save(any(Catalog.class));
 
     }
 
     @Test
     void testCreateCatalogInvalid() {
         when(jwtService.extractRole(token.getToken())).thenReturn(Role.ADMIN);
-        
         when(roomRepository.findById(anyInt())).thenReturn(Optional.of(room));
         when(furnitureRepository.findById(anyInt())).thenReturn(Optional.of(furniture));
+        
 
 
 
@@ -138,36 +139,38 @@ public class CatalogServiceTest {
         assertThrows(BadRequestException.class, () -> {
             catalogService.createCatalog(catalogRequest, token);
         });
-        catalogRequest.setRoomID(0);
+        catalogRequest.setRoomID(1);
 
         catalogRequest.setFurnitureID(-1);
         assertThrows(BadRequestException.class, () -> {
             catalogService.createCatalog(catalogRequest, token);
         });
-        catalogRequest.setFurnitureID(0);
+        catalogRequest.setFurnitureID(1);
 
         catalogRequest.setQuantity(-1);
         assertThrows(BadRequestException.class, () -> {
             catalogService.createCatalog(catalogRequest, token);
         });
+
+        verify(catalogRepository, times(0)).save(any(Catalog.class));
     }
 
     @Test
     void getCatalogByIdTest() {
         when(jwtService.extractRole(token.getToken())).thenReturn(Role.ADMIN);
 
-        when(catalogRepository.findById(0)).thenReturn(Optional.of(catalog));
-        when(roomRepository.findById(0)).thenReturn(Optional.of(room));
-        when(furnitureRepository.findById(0)).thenReturn(Optional.of(furniture));
+        when(catalogRepository.findById(catalog.getId())).thenReturn(Optional.of(catalog));
+        when(roomRepository.findById(room.getRoomID())).thenReturn(Optional.of(room));
+        when(furnitureRepository.findById(furniture.getFurID())).thenReturn(Optional.of(furniture));
 
-        CatalogResponse result = catalogService.getCatalogById(0, token);
+        CatalogResponse result = catalogService.getCatalogById(1, token);
 
         assertNotNull(result);
         assertEquals(catalogResponse, result);
 
-        verify(catalogRepository).findById(0);
-        verify(roomRepository).findById(0);
-        verify(furnitureRepository).findById(0);
+        verify(catalogRepository).findById(catalog.getId());
+        verify(roomRepository).findById(room.getRoomID());
+        verify(furnitureRepository).findById(furniture.getFurID());
     }
 
     @Test
@@ -175,8 +178,8 @@ public class CatalogServiceTest {
         when(jwtService.extractRole(token.getToken())).thenReturn(Role.ADMIN);
 
         when(catalogRepository.findAll()).thenReturn(java.util.List.of(catalog));
-        when(roomRepository.findById(0)).thenReturn(Optional.of(room));
-        when(furnitureRepository.findById(0)).thenReturn(Optional.of(furniture));
+        when(roomRepository.findById(room.getRoomID())).thenReturn(Optional.of(room));
+        when(furnitureRepository.findById(furniture.getFurID())).thenReturn(Optional.of(furniture));
 
         Iterable<CatalogResponse> result = catalogService.getCatalogAll(token);
 
@@ -184,34 +187,34 @@ public class CatalogServiceTest {
         assertEquals(java.util.List.of(catalogResponse), result);
 
         verify(catalogRepository).findAll();
-        verify(roomRepository).findById(0);
-        verify(furnitureRepository).findById(0);
+        verify(roomRepository).findById(room.getRoomID());
+        verify(furnitureRepository).findById(furniture.getFurID());
     }
 
     @Test
     void updateCatalogTest() {
         when(jwtService.extractRole(token.getToken())).thenReturn(Role.ADMIN);
 
-        when(roomRepository.findById(0)).thenReturn(Optional.of(room));
-        when(furnitureRepository.findById(0)).thenReturn(Optional.of(furniture));
-        when(catalogRepository.save(catalog)).thenReturn(catalog);
+        when(roomRepository.findById(room.getRoomID())).thenReturn(Optional.of(room));
+        when(furnitureRepository.findById(furniture.getFurID())).thenReturn(Optional.of(furniture));
+        when(catalogRepository.save(any(Catalog.class))).thenReturn(catalog);
 
-        CatalogResponse result = catalogService.updateCatalog(0, catalogRequest, token);
+        CatalogResponse result = catalogService.updateCatalog(1, catalogRequest, token);
 
         assertNotNull(result);
         assertEquals(catalogResponse, result);
 
-        verify(roomRepository).findById(0);
-        verify(furnitureRepository).findById(0);
+        verify(roomRepository).findById(room.getRoomID());
+        verify(furnitureRepository).findById(furniture.getFurID());
     }
 
     @Test
     void deleteCatalogTest() {
         when(jwtService.extractRole(token.getToken())).thenReturn(Role.ADMIN);
 
-        when(catalogRepository.findById(0)).thenReturn(Optional.of(catalog));
+        when(catalogRepository.findById(catalog.getId())).thenReturn(Optional.of(catalog));
 
-        catalogService.deleteCatalog(0, token);
+        catalogService.deleteCatalog(1, token);
 
         verify(catalogRepository).save(catalog);
     }
@@ -220,18 +223,18 @@ public class CatalogServiceTest {
     void getCatalogByRoomIdTest() {
         when(jwtService.extractRole(token.getToken())).thenReturn(Role.ADMIN);
 
-        when(catalogRepository.findByRoomId(0)).thenReturn(java.util.List.of(catalog));
-        when(roomRepository.findById(0)).thenReturn(Optional.of(room));
-        when(furnitureRepository.findById(0)).thenReturn(Optional.of(furniture));
+        when(catalogRepository.findByRoomId(room.getRoomID())).thenReturn(java.util.List.of(catalog));
+        when(roomRepository.findById(room.getRoomID())).thenReturn(Optional.of(room));
+        when(furnitureRepository.findById(furniture.getFurID())).thenReturn(Optional.of(furniture));
 
-        Iterable<CatalogResponse> result = catalogService.getCatalogByRoomId(0, token);
+        Iterable<CatalogResponse> result = catalogService.getCatalogByRoomId(1, token);
 
         assertNotNull(result);
         assertEquals(java.util.List.of(catalogResponse), result);
 
-        verify(catalogRepository).findByRoomId(0);
-        verify(roomRepository).findById(0);
-        verify(furnitureRepository).findById(0);
+        verify(catalogRepository).findByRoomId(1);
+        verify(roomRepository).findById(1);
+        verify(furnitureRepository).findById(1);
     }
 
     

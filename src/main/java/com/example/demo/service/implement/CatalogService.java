@@ -42,6 +42,7 @@ public class CatalogService implements ICatalogService {
         
         CatalogValidator.validateCatalog(catalogModel);
         
+        
         Catalog c = catalogRepository.save(CatalogConverter.toEntity(catalogModel));
         
         return CatalogConverter.toModel(c, room, furniture);

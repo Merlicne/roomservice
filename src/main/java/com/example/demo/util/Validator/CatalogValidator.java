@@ -14,19 +14,19 @@ public class CatalogValidator {
     public final FurnitureRepository furnitureRepository;
 
     public static void validateid(CatalogRequest catalog) {
-        if (catalog.getId() < 0) {
+        if (catalog.getId() <= 0) {
             throw new BadRequestException("Catalog ID must be greater than 0");
         }
     }
 
     public static void validateRoomId(CatalogRequest catalog) {
-        if (catalog.getRoomID() == 0) {
+        if (catalog.getRoomID() <= 0) {
             throw new BadRequestException("Room ID cannot be empty");
         } 
     }
 
     public static void validateFurnitureId(CatalogRequest catalog) {
-        if (catalog.getFurnitureID() == 0) {
+        if (catalog.getFurnitureID() <= 0) {
             throw new BadRequestException("Furniture ID cannot be empty");
         } 
     }
