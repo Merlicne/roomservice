@@ -20,8 +20,8 @@ import com.example.demo.repository.FurnitureRepository;
 import com.example.demo.repository.RoomRepository;
 import com.example.demo.service.ICatalogService;
 import com.example.demo.util.converter.CatalogConverter;
-import com.example.demo.util.validator.CatalogValidator;
-import com.example.demo.util.validator.RoleValidation;
+import com.example.demo.util.validator_.CatalogValidator;
+import com.example.demo.util.validator_.RoleValidation;
 
 import lombok.RequiredArgsConstructor;
 

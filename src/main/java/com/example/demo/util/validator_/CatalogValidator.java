@@ -1,4 +1,4 @@
-package com.example.demo.util.validator;
+package com.example.demo.util.validator_;
 
 // import com.example.demo.entity.Furniture;
 import com.example.demo.exception.BadRequestException;
