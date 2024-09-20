@@ -18,7 +18,7 @@ public class DormServiceWebClient implements IDormService {
     
         return webClient.get()
                 .uri("/building/{buildingId}", buildingId)
-                .header("Authorization", token.getToken())
+                .headers(headers -> headers.setBearerAuth(token.getToken()))
                 .retrieve()
                 .bodyToMono(BuildingModel.class)
                 .block();
