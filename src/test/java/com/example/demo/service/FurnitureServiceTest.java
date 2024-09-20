@@ -22,10 +22,9 @@ import com.example.demo.model.JwtToken;
 import com.example.demo.model.Role;
 import com.example.demo.repository.FurnitureRepository;
 import com.example.demo.service.implement.FurnitureService;
-import com.example.demo.util.converter.FurnitureConverter;
 
 @ExtendWith(MockitoExtension.class)
-public class FurnitureServiceTest {
+class FurnitureServiceTest {
     @Mock
     private FurnitureRepository furnitureRepository;
 
@@ -132,8 +131,6 @@ public class FurnitureServiceTest {
     @Test
     void testCreateFurnitureInvalid() {
         when(jwtService.extractRole(token.getToken())).thenReturn(Role.ADMIN);
-
-        // when(furnitureRepository.save(furniture)).thenReturn(furniture);
 
         furnitureModel.setName(null);
         assertThrows(BadRequestException.class, () -> {

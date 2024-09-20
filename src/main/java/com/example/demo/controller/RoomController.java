@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-// import com.example.demo.entity.Room;
 import com.example.demo.service.IRoomService;
 import com.example.demo.model.JwtToken;
 import com.example.demo.model.ResponseBody;
