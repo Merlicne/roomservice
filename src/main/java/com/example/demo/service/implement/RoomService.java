@@ -13,9 +13,9 @@ import com.example.demo.model.Role;
 import com.example.demo.model.RoomModel;
 import com.example.demo.repository.RoomRepository;
 import com.example.demo.service.IRoomService;
-import com.example.demo.util.Validator.RoleValidation;
-import com.example.demo.util.Validator.RoomValidator;
 import com.example.demo.util.converter.RoomConverter;
+import com.example.demo.util.validator.RoleValidation;
+import com.example.demo.util.validator.RoomValidator;
 
 import lombok.RequiredArgsConstructor;
 
