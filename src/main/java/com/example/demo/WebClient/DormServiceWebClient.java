@@ -18,7 +18,7 @@ public class DormServiceWebClient implements IDormService {
     public BuildingModel getBuildingById(int buildingId, JwtToken token) {
     
         ResponseBody<BuildingModel> response = webClient.get()
-                .uri("/api/v1/building/{buildingId}", buildingId)
+                .uri("/building/{buildingId}", buildingId)
                 .headers(headers -> headers.setBearerAuth(token.getToken()))
                 .retrieve()
                 .bodyToMono(ResponseBody.class)
