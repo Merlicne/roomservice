@@ -8,7 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class AppConfig {
     @Bean
     public WebClient webClient(WebClient.Builder builder) {
-        return builder.baseUrl("lb://dorm-service/api/v1").build();
+        return builder.baseUrl("lb://dorm-service").build();
     }
 
     
