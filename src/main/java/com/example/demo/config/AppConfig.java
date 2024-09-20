@@ -7,8 +7,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class AppConfig {
+
     @Bean
-    @LoadBalanced
+    @LoadBalanced  // Ensures the lb:// scheme is recognized
+    public WebClient.Builder webClientBuilder() {
+        return WebClient.builder();
+    }
+
+    @Bean
     public WebClient webClient(WebClient.Builder builder) {
         return builder.baseUrl("lb://dorm-service/api/v1").build();
     }
