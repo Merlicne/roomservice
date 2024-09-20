@@ -30,7 +30,7 @@ public class FurnitureController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         Iterable<FurnitureModel> f = furnitureService.getFurnitureAll(jwtToken);
-        return new ResponseBody<>(HttpStatus.OK, "Furniture found", f);
+        return new ResponseBody<>(HttpStatus.OK.value(), "Furniture found", f);
     }
 
     @GetMapping("/furniture/{id}")
@@ -39,7 +39,7 @@ public class FurnitureController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         FurnitureModel f = furnitureService.getFurnitureById(id, jwtToken);
-        return new ResponseBody<>(HttpStatus.OK, "Furniture found", f);
+        return new ResponseBody<>(HttpStatus.OK.value(), "Furniture found", f);
     }
 
     @PostMapping("/furniture")
@@ -48,7 +48,7 @@ public class FurnitureController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
         
         FurnitureModel f = furnitureService.createFurniture(furnitureModel, jwtToken);
-        return new ResponseBody<>(HttpStatus.CREATED, "Furniture created", f);
+        return new ResponseBody<>(HttpStatus.CREATED.value(), "Furniture created", f);
     }
     
     @PutMapping("/furniture/{id}")
@@ -57,7 +57,7 @@ public class FurnitureController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         FurnitureModel f = furnitureService.updateFurniture(id, furnitureModel, jwtToken);
-        return new ResponseBody<>(HttpStatus.OK, "Furniture updated", f);
+        return new ResponseBody<>(HttpStatus.OK.value(), "Furniture updated", f);
     }
 
     @DeleteMapping("/furniture/{id}")
@@ -66,6 +66,6 @@ public class FurnitureController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         furnitureService.deleteFurniture(id, jwtToken);
-        return new ResponseBody<>(HttpStatus.OK, "Furniture deleted", null);
+        return new ResponseBody<>(HttpStatus.OK.value(), "Furniture deleted", null);
     }
 }

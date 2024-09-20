@@ -31,7 +31,7 @@ public class RoomController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         RoomModel r = roomService.getRoomById(id, jwtToken);
-        return new ResponseBody<>(HttpStatus.OK, "Room found", r);
+        return new ResponseBody<>(HttpStatus.OK.value(), "Room found", r);
     }
 
     @GetMapping("/room")
@@ -40,7 +40,7 @@ public class RoomController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         Iterable<RoomModel> r = roomService.getRoomAll(jwtToken);
-        return new ResponseBody<>(HttpStatus.OK, "Room found", r);
+        return new ResponseBody<>(HttpStatus.OK.value(), "Room found", r);
     }
 
     @PostMapping("/room")
@@ -49,7 +49,7 @@ public class RoomController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         RoomModel r = roomService.createRoom(roomModel, jwtToken);
-        return new ResponseBody<>(HttpStatus.CREATED, "Room created", r);
+        return new ResponseBody<>(HttpStatus.CREATED.value(), "Room created", r);
     }
 
     @PutMapping("/room/{id}")
@@ -58,7 +58,7 @@ public class RoomController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
         
         RoomModel r = roomService.updateRoom(id, roomModel, jwtToken);
-        return new ResponseBody<>(HttpStatus.OK, "Room updated", r);
+        return new ResponseBody<>(HttpStatus.OK.value(), "Room updated", r);
     }
 
     @DeleteMapping("/room/{id}")
@@ -67,7 +67,7 @@ public class RoomController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         roomService.deleteRoom(id, jwtToken);
-        return new ResponseBody<>(HttpStatus.OK, "Room deleted", null);
+        return new ResponseBody<>(HttpStatus.OK.value(), "Room deleted", null);
     }
 
     @GetMapping("/room/building/{buildingId}")
@@ -76,7 +76,7 @@ public class RoomController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         Iterable<RoomModel> r = roomService.getRoomByBuildingId(buildingId, jwtToken);
-        return new ResponseBody<>(HttpStatus.OK, "Room found", r);
+        return new ResponseBody<>(HttpStatus.OK.value(), "Room found", r);
     }
 
     

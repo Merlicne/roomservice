@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseBody<T> {
-    private HttpStatus status;
+    private int status;
     private String message;
     private T data;
 }

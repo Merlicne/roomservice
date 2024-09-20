@@ -31,7 +31,7 @@ public class CatalogController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         Iterable<CatalogResponse> cats = catalogService.getCatalogAll(jwtToken);
-        return new ResponseBody<>(HttpStatus.OK, "Catalog found", cats);
+        return new ResponseBody<>(HttpStatus.OK.value(), "Catalog found", cats);
     }
 
     @GetMapping("/catalog/{id}")
@@ -40,7 +40,7 @@ public class CatalogController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         CatalogResponse cat = catalogService.getCatalogById(id, jwtToken);
-        return new ResponseBody<>(HttpStatus.OK, "Catalog found", cat);
+        return new ResponseBody<>(HttpStatus.OK.value(), "Catalog found", cat);
     }
 
     @GetMapping("/catalog/room/{roomId}")
@@ -49,7 +49,7 @@ public class CatalogController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         Iterable<CatalogResponse> cats = catalogService.getCatalogByRoomId(roomId, jwtToken);
-        return new ResponseBody<>(HttpStatus.OK, "Catalog found", cats);
+        return new ResponseBody<>(HttpStatus.OK.value(), "Catalog found", cats);
     }
 
     @PostMapping("/catalog")
@@ -58,7 +58,7 @@ public class CatalogController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         CatalogResponse cat = catalogService.createCatalog(catalogModel, jwtToken);
-        return new ResponseBody<>(HttpStatus.CREATED, "Catalog created", cat);
+        return new ResponseBody<>(HttpStatus.CREATED.value(), "Catalog created", cat);
     }
 
     @PutMapping("/catalog/{id}")
@@ -67,7 +67,7 @@ public class CatalogController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         CatalogResponse cat = catalogService.updateCatalog(id, catalogModel, jwtToken);
-        return new ResponseBody<>(HttpStatus.OK, "Catalog updated", cat);
+        return new ResponseBody<>(HttpStatus.OK.value(), "Catalog updated", cat);
     }
 
     @DeleteMapping("/catalog/{id}")
@@ -76,7 +76,7 @@ public class CatalogController {
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
         catalogService.deleteCatalog(id, jwtToken);
-        return new ResponseBody<>(HttpStatus.OK, "Catalog deleted", null);
+        return new ResponseBody<>(HttpStatus.OK.value(), "Catalog deleted", null);
     }
 
 }
