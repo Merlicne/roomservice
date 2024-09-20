@@ -19,9 +19,9 @@ import com.example.demo.repository.CatalogRepository;
 import com.example.demo.repository.FurnitureRepository;
 import com.example.demo.repository.RoomRepository;
 import com.example.demo.service.ICatalogService;
-import com.example.demo.util.Validator.CatalogValidator;
-import com.example.demo.util.Validator.RoleValidation;
 import com.example.demo.util.converter.CatalogConverter;
+import com.example.demo.util.validator.CatalogValidator;
+import com.example.demo.util.validator.RoleValidation;
 
 import lombok.RequiredArgsConstructor;
 

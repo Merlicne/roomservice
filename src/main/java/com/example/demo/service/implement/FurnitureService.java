@@ -12,9 +12,9 @@ import com.example.demo.model.JwtToken;
 import com.example.demo.model.Role;
 import com.example.demo.repository.FurnitureRepository;
 import com.example.demo.service.IFurnitureService;
-import com.example.demo.util.Validator.FurnitureValidator;
-import com.example.demo.util.Validator.RoleValidation;
 import com.example.demo.util.converter.FurnitureConverter;
+import com.example.demo.util.validator.FurnitureValidator;
+import com.example.demo.util.validator.RoleValidation;
 
 import lombok.RequiredArgsConstructor;
 
