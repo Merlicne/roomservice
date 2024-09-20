@@ -1,0 +1,47 @@
+{"properties": [
+  {
+    "name": "security.allow.issuer",
+    "type": "java.lang.String",
+    "description": "The issuer to allow for JWT tokens."
+  },
+  {
+    "name": "security.jwt.secret.key",
+    "type": "java.lang.String",
+    "description": "The secret key to use for JWT tokens."
+  },
+  {
+    "name": "security.jwt.expiration.time",
+    "type": "java.lang.String",
+    "description": "The expiration time for JWT tokens. Default is 86400000 milli-second."
+  },
+  {
+    "name": "eureka.client.enabled",
+    "type": "java.lang.String",
+    "description": "Enable Eureka client."
+  },
+  {
+    "name": "eureka.instance.prefer-ip-address",
+    "type": "java.lang.String",
+    "description": ""
+  },
+  {
+    "name": "eureka.instance.prefer-ip-address",
+    "type": "java.lang.String",
+    "description": "A description for 'eureka.instance.prefer-ip-address'"
+  },
+  {
+    "name": "eureka.instance.lease-renewal-interval-in-seconds",
+    "type": "java.lang.String",
+    "description": "A description for 'eureka.instance.lease-renewal-interval-in-seconds'"
+  },
+  {
+    "name": "eureka.instance.instance-id",
+    "type": "java.lang.String",
+    "description": "A description for 'eureka.instance.instance-id'"
+  },
+  {
+    "name": "eureka.instance.lease-expiration-duration-in-seconds",
+    "type": "java.lang.String",
+    "description": "A description for 'eureka.instance.lease-expiration-duration-in-seconds'"
+  }
+]}
