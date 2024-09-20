@@ -5,6 +5,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.demo.model.BuildingModel;
 import com.example.demo.model.JwtToken;
+import com.example.demo.model.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,11 +17,13 @@ public class DormServiceWebClient implements IDormService {
     
     public BuildingModel getBuildingById(int buildingId, JwtToken token) {
     
-        return webClient.get()
+        ResponseBody<BuildingModel> response = webClient.get()
                 .uri("/building/{buildingId}", buildingId)
                 .headers(headers -> headers.setBearerAuth(token.getToken()))
                 .retrieve()
-                .bodyToMono(BuildingModel.class)
+                .bodyToMono(ResponseBody.class)
                 .block();
+
+        return response.getData();
     }
 }
