@@ -15,6 +15,7 @@ import com.example.demo.model.CatalogRequest;
 import com.example.demo.model.CatalogResponse;
 import com.example.demo.model.JwtToken;
 import com.example.demo.model.ResponseBody;
+import com.example.demo.model.RoomCatalog;
 import com.example.demo.service.implement.CatalogService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,29 +27,29 @@ public class CatalogController {
     private final CatalogService catalogService;
 
     @GetMapping("/catalog")
-    public ResponseBody<Iterable<CatalogResponse>> getCatalogAll(@RequestHeader("Authorization") String token) {
+    public ResponseBody<Iterable<RoomCatalog>> getCatalogAll(@RequestHeader("Authorization") String token) {
         token = token.substring(7); 
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
-        Iterable<CatalogResponse> cats = catalogService.getCatalogAll(jwtToken);
+        Iterable<RoomCatalog> cats = catalogService.getCatalogAll(jwtToken);
         return new ResponseBody<>(HttpStatus.OK.value(), "Catalog found", cats);
     }
 
     @GetMapping("/catalog/{id}")
-    public ResponseBody<CatalogResponse> getCatalogById(@RequestHeader("Authorization") String token, @PathVariable int id) {
+    public ResponseBody<RoomCatalog> getCatalogById(@RequestHeader("Authorization") String token, @PathVariable int id) {
         token = token.substring(7); 
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
-        CatalogResponse cat = catalogService.getCatalogById(id, jwtToken);
+        RoomCatalog cat = catalogService.getCatalogById(id, jwtToken);
         return new ResponseBody<>(HttpStatus.OK.value(), "Catalog found", cat);
     }
 
     @GetMapping("/catalog/room/{roomId}")
-    public ResponseBody<Iterable<CatalogResponse>> getCatalogByRoomId(@RequestHeader("Authorization") String token, @PathVariable int roomId) {
+    public ResponseBody<RoomCatalog> getCatalogByRoomId(@RequestHeader("Authorization") String token, @PathVariable int roomId) {
         token = token.substring(7); 
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
-        Iterable<CatalogResponse> cats = catalogService.getCatalogByRoomId(roomId, jwtToken);
+        RoomCatalog cats = catalogService.getCatalogByRoomId(roomId, jwtToken);
         return new ResponseBody<>(HttpStatus.OK.value(), "Catalog found", cats);
     }
 
