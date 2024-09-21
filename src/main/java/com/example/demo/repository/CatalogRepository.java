@@ -20,7 +20,7 @@ public interface CatalogRepository extends JpaRepository<Catalog, Integer> {
     public Iterable<Catalog> findRentAll();
 
     // findByRoomId which deletedAt is null
-    @Query(value = "SELECT * FROM catalog WHERE room_id = ?1 AND deleted_at IS NULL", nativeQuery = true)
+    @Query(value = "SELECT * FROM catalog WHERE roomID = ?1 AND deleted_at IS NULL", nativeQuery = true)
     public Iterable<Catalog> findByRoomId(int roomId);
 
 

@@ -15,11 +15,13 @@ import com.example.demo.model.CatalogRequest;
 import com.example.demo.model.CatalogResponse;
 import com.example.demo.model.JwtToken;
 import com.example.demo.model.Role;
+import com.example.demo.model.RoomCatalog;
 import com.example.demo.repository.CatalogRepository;
 import com.example.demo.repository.FurnitureRepository;
 import com.example.demo.repository.RoomRepository;
 import com.example.demo.service.ICatalogService;
 import com.example.demo.util.converter.CatalogConverter;
+import com.example.demo.util.converter.RoomConverter;
 import com.example.demo.util.validator.CatalogValidator;
 import com.example.demo.util.validator.RoleValidation;
 
@@ -48,29 +50,35 @@ public class CatalogService implements ICatalogService {
         return CatalogConverter.toModel(c, room, furniture);
     }
     
-    public CatalogResponse getCatalogById(int id, JwtToken token) {
+    public RoomCatalog getCatalogById(int id, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
 
         Catalog c = catalogRepository.findById(id).orElseThrow(() -> new NotFoundException("Catalog not found"));
-        Room room = roomRepository.findById(c.getRoomID()).orElseThrow(() -> new NotFoundException("Room not found"));
-        Furniture furniture = furnitureRepository.findById(c.getFurnitureID()).orElseThrow(() -> new NotFoundException("Furniture not found"));
-        return CatalogConverter.toModel(c, room, furniture);
+        // Room room = roomRepository.findById(c.getRoomID()).orElseThrow(() -> new NotFoundException("Room not found"));
+        // Furniture furniture = furnitureRepository.findById(c.getFurnitureID()).orElseThrow(() -> new NotFoundException("Furniture not found"));
+        // return CatalogConverter.toModel(c, room, furniture);
+        return getCatalogByRoomId(c.getRoomID(), token);
     }
 
-    public Iterable<CatalogResponse> getCatalogAll(JwtToken token) {
+    public Iterable<RoomCatalog> getCatalogAll(JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
 
         Iterable<Catalog> cats = catalogRepository.findAll();
-        List<CatalogResponse> catalogResponse = new ArrayList<>();
+        List<RoomCatalog> rcs = new ArrayList<>();
 
+        // for (Catalog c : cats) {
+        //     Room room = roomRepository.findById(c.getRoomID()).orElseThrow(() -> new NotFoundException("Room not found"));
+        //     Furniture furniture = furnitureRepository.findById(c.getFurnitureID()).orElseThrow(() -> new NotFoundException("Furniture not found"));
+        //     catalogResponse.add(CatalogConverter.toModel(c, room, furniture));
+        // }
+        // return catalogResponse;
         for (Catalog c : cats) {
-            Room room = roomRepository.findById(c.getRoomID()).orElseThrow(() -> new NotFoundException("Room not found"));
-            Furniture furniture = furnitureRepository.findById(c.getFurnitureID()).orElseThrow(() -> new NotFoundException("Furniture not found"));
-            catalogResponse.add(CatalogConverter.toModel(c, room, furniture));
+            RoomCatalog rc = getCatalogByRoomId(c.getRoomID(), token);
+            rcs.add(rc);
         }
-        return catalogResponse;
+        return rcs;
     }
 
     public CatalogResponse updateCatalog(int id, CatalogRequest catalogModel, JwtToken token) {
@@ -94,19 +102,30 @@ public class CatalogService implements ICatalogService {
         catalogRepository.save(c);
     }
 
-    public Iterable<CatalogResponse> getCatalogByRoomId(int roomId, JwtToken token) {
+    public RoomCatalog getCatalogByRoomId(int roomId, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
         
+        Room room = roomRepository.findById(roomId).orElseThrow(() -> new NotFoundException("Room not found"));
         Iterable<Catalog> cats = catalogRepository.findByRoomId(roomId);
-        List<CatalogResponse> catalogResponse = new ArrayList<>();
 
+        List<CatalogResponse> catalogResponse = new ArrayList<>();
+        // List<Furniture> furs = new ArrayList<>();
+
+
+        // Room room = roomRepository.findById(c.getRoomID()).orElseThrow(() -> new NotFoundException("Room not found"));
         for (Catalog c : cats) {
-            Room room = roomRepository.findById(c.getRoomID()).orElseThrow(() -> new NotFoundException("Room not found"));
             Furniture furniture = furnitureRepository.findById(c.getFurnitureID()).orElseThrow(() -> new NotFoundException("Furniture not found"));
             catalogResponse.add(CatalogConverter.toModel(c, room, furniture));
+            // furs.add(furniture);
         }
-        return catalogResponse;
+
+        return RoomCatalog.builder()
+            .room(RoomConverter.toModel(room))
+            .catalog(catalogResponse)
+            .build();
+
+        // return CatalogConverter;
     }
     
 }

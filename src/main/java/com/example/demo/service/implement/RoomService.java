@@ -39,7 +39,7 @@ public class RoomService implements IRoomService {
 
     public RoomModel getRoomById(int id, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
-        RoleValidation.allowRoles(role, Role.ADMIN);
+        RoleValidation.allowRoles(role, Role.ADMIN, Role.TENANT);
 
         Room r = roomRepository.findById(id).orElseThrow(() -> new NotFoundException("Room not found"));
         return RoomConverter.toModel(r);
