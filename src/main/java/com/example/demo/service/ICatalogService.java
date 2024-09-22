@@ -9,18 +9,18 @@ import com.example.demo.model.RoomCatalog;
 
 public interface ICatalogService {
 
-    @Retryable(value = { Exception.class }, maxAttempts = 5)
+    @Retryable(retryFor = Exception.class, maxAttempts = 5)
     public CatalogResponse createCatalog(CatalogRequest catalogModel, JwtToken token);
     
-    @Retryable(value = { Exception.class }, maxAttempts = 5)
+    @Retryable(retryFor = Exception.class, maxAttempts = 5)
     public Iterable<RoomCatalog> getCatalogAll(JwtToken token);
 
-    @Retryable(value = { Exception.class }, maxAttempts = 5)
+    @Retryable(retryFor = Exception.class, maxAttempts = 5)
     public CatalogResponse updateCatalog(int id, CatalogRequest catalogModel, JwtToken token);
 
-    @Retryable(value = { Exception.class }, maxAttempts = 5)
+    @Retryable(retryFor = Exception.class, maxAttempts = 5)
     public void deleteCatalog(int id, JwtToken token);
 
-    @Retryable(value = { Exception.class }, maxAttempts = 5)
+    @Retryable(retryFor = Exception.class, maxAttempts = 5)
     public RoomCatalog getCatalogByRoomId(int roomId, JwtToken token);
 }
