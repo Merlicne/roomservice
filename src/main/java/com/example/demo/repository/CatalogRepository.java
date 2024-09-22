@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Catalog;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -17,11 +18,11 @@ public interface CatalogRepository extends JpaRepository<Catalog, Integer> {
 
     // find all catalog which deletedAt is null
     @Query(value = "SELECT * FROM catalog WHERE deleted_at IS NULL", nativeQuery = true)
-    public Iterable<Catalog> findRentAll();
+    public List<Catalog> findRentAll();
 
     // findByRoomId which deletedAt is null
     @Query(value = "SELECT * FROM catalog WHERE roomID = ?1 AND deleted_at IS NULL", nativeQuery = true)
-    public Iterable<Catalog> findByRoomId(int roomId);
+    public List<Catalog> findByRoomId(int roomId);
 
 
 }

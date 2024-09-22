@@ -1,5 +1,8 @@
 package com.example.demo.util.converter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.demo.entity.Catalog;
 import com.example.demo.entity.Furniture;
 import com.example.demo.entity.Room;
@@ -47,6 +50,16 @@ public class CatalogConverter {
                 .deletedAt(catalog.getDeletedAt())
                 .build();
     }
+
+//     public static List<CatalogResponse> toModels(Catalog catalog) {
+//         List<CatalogResponse> catalogResponses = new ArrayList<>();
+//         for (Catalog c : catalog) {
+//                 Room room = roomRepository.findById(c.getRoomID()).orElseThrow(() -> new NotFoundException("Room not found"));
+//                 Furniture furniture = furnitureRepository.findById(c.getFurnitureID()).orElseThrow(() -> new NotFoundException("Furniture not found"));
+//                 catalogResponses.add(toModel(c, room, furniture));
+//         }
+//         return catalogResponses;
+//     }
 
     
 }
