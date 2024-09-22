@@ -65,7 +65,7 @@ public class CatalogService implements ICatalogService {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
 
-        List<Room> rooms = roomRepository.findAll();
+        Iterable<Room> rooms = roomRepository.findRoomAll();
 
         List<RoomCatalog> rcs = new ArrayList<>();
         

@@ -49,7 +49,7 @@ public class RoomService implements IRoomService {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
 
-        return RoomConverter.toModel(roomRepository.findAll());
+        return RoomConverter.toModel(roomRepository.findRoomAll());
     }
 
     public RoomModel updateRoom(int id, RoomModel roomModel, JwtToken token) {
