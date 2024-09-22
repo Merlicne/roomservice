@@ -50,16 +50,6 @@ public class CatalogService implements ICatalogService {
         return CatalogConverter.toModel(c, room, furniture);
     }
     
-    // public RoomCatalog getCatalogById(int id, JwtToken token) {
-    //     Role role = jwtService.extractRole(token.getToken());
-    //     RoleValidation.allowRoles(role, Role.ADMIN);
-
-    //     Catalog c = catalogRepository.findById(id).orElseThrow(() -> new NotFoundException("Catalog not found"));
-    //     // Room room = roomRepository.findById(c.getRoomID()).orElseThrow(() -> new NotFoundException("Room not found"));
-    //     // Furniture furniture = furnitureRepository.findById(c.getFurnitureID()).orElseThrow(() -> new NotFoundException("Furniture not found"));
-    //     // return CatalogConverter.toModel(c, room, furniture);
-    //     return getCatalogByRoomId(c.getRoomID(), token);
-    // }
 
     public Iterable<RoomCatalog> getCatalogAll(JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
@@ -69,19 +59,13 @@ public class CatalogService implements ICatalogService {
 
         List<RoomCatalog> rcs = new ArrayList<>();
         
-        // for (Catalog c : cats) {
-            //     Room room = roomRepository.findById(c.getRoomID()).orElseThrow(() -> new NotFoundException("Room not found"));
-            //     Furniture furniture = furnitureRepository.findById(c.getFurnitureID()).orElseThrow(() -> new NotFoundException("Furniture not found"));
-            //     catalogResponse.add(CatalogConverter.toModel(c, room, furniture));
-            // }
-            // return catalogResponse;
         for (Room r : rooms) {
             List<Catalog> cats = catalogRepository.findByRoomId(r.getRoomID());
             
             List<CatalogResponse> catalogResponses = new ArrayList<>();
             for (Catalog c : cats) {
                 Furniture furniture = furnitureRepository.findById(c.getFurnitureID()).orElseThrow(() -> new NotFoundException("Furniture not found"));
-                catalogResponses.add(CatalogConverter.toModel(c, r, furniture));
+                catalogResponses.add(CatalogConverter.toModel_RoomCatalog(c, furniture));
             }
 
             RoomCatalog rc = RoomCatalog.builder()
@@ -123,14 +107,11 @@ public class CatalogService implements ICatalogService {
         Iterable<Catalog> cats = catalogRepository.findByRoomId(roomId);
 
         List<CatalogResponse> catalogResponse = new ArrayList<>();
-        // List<Furniture> furs = new ArrayList<>();
-
-
-        // Room room = roomRepository.findById(c.getRoomID()).orElseThrow(() -> new NotFoundException("Room not found"));
+        
         for (Catalog c : cats) {
             Furniture furniture = furnitureRepository.findById(c.getFurnitureID()).orElseThrow(() -> new NotFoundException("Furniture not found"));
-            catalogResponse.add(CatalogConverter.toModel(c, room, furniture));
-            // furs.add(furniture);
+            catalogResponse.add(CatalogConverter.toModel_RoomCatalog(c, furniture));
+            
         }
 
         return RoomCatalog.builder()
@@ -138,7 +119,6 @@ public class CatalogService implements ICatalogService {
             .catalog(catalogResponse)
             .build();
 
-        // return CatalogConverter;
     }
     
 }

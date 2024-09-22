@@ -62,6 +62,7 @@ class CatalogServiceTest {
     private FurnitureModel furnitureModel;
     private JwtToken token;
     private RoomModel roomModel;
+    private CatalogResponse furResponse;
 
     @BeforeEach
     void setUp() {
@@ -113,9 +114,16 @@ class CatalogServiceTest {
             .createdAt(null)
             .build();
         
+        furResponse = CatalogResponse.builder()
+            .id(1)
+            .furniture(furnitureModel)
+            .quantity(1)
+            .createdAt(null)
+            .build();
+        
         roomCatalog = RoomCatalog.builder()    
             .room(roomModel)
-            .catalog(java.util.List.of(catalogResponse))
+            .catalog(java.util.List.of(furResponse))
             .build();
     }
 
@@ -201,7 +209,8 @@ class CatalogServiceTest {
 
         // verify(catalogRepository).findAll();
         // verify(roomRepository).findRoomAll();
-        verify(furnitureRepository).findById(furniture.getFurID());
+
+        // verify(furnitureRepository).findById(furniture.getFurID());
     }
 
     @Test

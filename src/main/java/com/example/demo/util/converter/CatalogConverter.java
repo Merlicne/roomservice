@@ -36,10 +36,6 @@ public class CatalogConverter {
                         .roomNo(room.getRoomNo())
                         .roomPrice(room.getRoomPrice())
                         .build())
-                // .room(CatalogResponse.Room.builder()
-                //         .id(room.getRoomID())
-                //         .roomNo(room.getRoomNo())
-                //         .build())
                 .furniture(FurnitureModel.builder()
                         .id(furniture.getFurID())
                         .name(furniture.getName())
@@ -51,15 +47,19 @@ public class CatalogConverter {
                 .build();
     }
 
-//     public static List<CatalogResponse> toModels(Catalog catalog) {
-//         List<CatalogResponse> catalogResponses = new ArrayList<>();
-//         for (Catalog c : catalog) {
-//                 Room room = roomRepository.findById(c.getRoomID()).orElseThrow(() -> new NotFoundException("Room not found"));
-//                 Furniture furniture = furnitureRepository.findById(c.getFurnitureID()).orElseThrow(() -> new NotFoundException("Furniture not found"));
-//                 catalogResponses.add(toModel(c, room, furniture));
-//         }
-//         return catalogResponses;
-//     }
+    public static CatalogResponse toModel_RoomCatalog(Catalog catalog, Furniture furniture) {
+        return CatalogResponse.builder()
+                .id(catalog.getId())
+                .furniture(FurnitureModel.builder()
+                        .id(furniture.getFurID())
+                        .name(furniture.getName())
+                        .build())
+                .quantity(catalog.getQuantity())
+                .createdAt(catalog.getCreatedAt())
+                .updatedAt(catalog.getUpdatedAt())
+                .deletedAt(catalog.getDeletedAt())
+                .build();
+    }
 
     
 }
