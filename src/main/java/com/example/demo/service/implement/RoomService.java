@@ -3,6 +3,7 @@ package com.example.demo.service.implement;
 import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.WebClient.DormServiceWebClient;
 import com.example.demo.entity.Room;
@@ -27,6 +28,7 @@ public class RoomService implements IRoomService {
     private final DormServiceWebClient dormService;
     private final JwtService jwtService;
 
+    @Transactional
     public RoomModel createRoom(RoomModel roomModel, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
@@ -52,6 +54,7 @@ public class RoomService implements IRoomService {
         return RoomConverter.toModel(roomRepository.findRoomAll());
     }
 
+    @Transactional
     public RoomModel updateRoom(int id, RoomModel roomModel, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
@@ -67,6 +70,7 @@ public class RoomService implements IRoomService {
         return RoomConverter.toModel(r);
     }
      
+    @Transactional
     public void deleteRoom(int id, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);

@@ -45,7 +45,8 @@ public class CatalogController {
     // }
 
     @GetMapping("/catalog/room/{roomId}")
-    public ResponseBody<RoomCatalog> getCatalogByRoomId(@RequestHeader("Authorization") String token, @PathVariable int roomId) {
+    public ResponseBody<RoomCatalog> getCatalogByRoomId(@RequestHeader("Authorization") String token
+                                                        , @PathVariable int roomId) {
         token = token.substring(7); 
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
@@ -54,7 +55,8 @@ public class CatalogController {
     }
 
     @PostMapping("/catalog")
-    public ResponseBody<CatalogResponse> createCatalog(@RequestHeader("Authorization") String token, @RequestBody CatalogRequest catalogModel) {
+    public ResponseBody<CatalogResponse> createCatalog(@RequestHeader("Authorization") String token
+                                                        , @RequestBody CatalogRequest catalogModel) {
         token = token.substring(7); 
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
@@ -63,7 +65,9 @@ public class CatalogController {
     }
 
     @PutMapping("/catalog/{id}")
-    public ResponseBody<CatalogResponse> updateCatalog(@RequestHeader("Authorization") String token, @PathVariable int id, @RequestBody CatalogRequest catalogModel) {
+    public ResponseBody<CatalogResponse> updateCatalog(@RequestHeader("Authorization") String token
+                                                        , @PathVariable int id
+                                                        , @RequestBody CatalogRequest catalogModel) {
         token = token.substring(7); 
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 
@@ -72,7 +76,8 @@ public class CatalogController {
     }
 
     @DeleteMapping("/catalog/{id}")
-    public ResponseBody<Void> deleteCatalog(@RequestHeader("Authorization") String token, @PathVariable int id) {
+    public ResponseBody<Void> deleteCatalog(@RequestHeader("Authorization") String token
+                                            , @PathVariable int id) {
         token = token.substring(7); 
         JwtToken jwtToken = JwtToken.builder().token(token).build();
 

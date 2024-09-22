@@ -3,6 +3,7 @@ package com.example.demo.service.implement;
 import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.Furniture;
 import com.example.demo.exception.NotFoundException;
@@ -24,6 +25,7 @@ public class FurnitureService implements IFurnitureService {
     private final FurnitureRepository furnitureRepository;
     private final JwtService jwtService;
 
+    @Transactional
     public FurnitureModel createFurniture(FurnitureModel furnitureModel, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
@@ -49,6 +51,7 @@ public class FurnitureService implements IFurnitureService {
         return FurnitureConverter.toModel(furs);
     }
 
+    @Transactional
     public FurnitureModel updateFurniture(int id, FurnitureModel furnitureModel, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
@@ -62,6 +65,7 @@ public class FurnitureService implements IFurnitureService {
         return FurnitureConverter.toModel(fur);
     }
      
+    @Transactional
     public void deleteFurniture(int id, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);

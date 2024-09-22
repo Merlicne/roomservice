@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.Catalog;
 import com.example.demo.entity.Furniture;
@@ -35,6 +36,7 @@ public class CatalogService implements ICatalogService {
     private final RoomRepository roomRepository;
     private final JwtService jwtService;
 
+    @Transactional
     public CatalogResponse createCatalog(CatalogRequest catalogModel, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
@@ -78,6 +80,7 @@ public class CatalogService implements ICatalogService {
         return rcs;
     }
 
+    @Transactional
     public CatalogResponse updateCatalog(int id, CatalogRequest catalogModel, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
@@ -90,6 +93,7 @@ public class CatalogService implements ICatalogService {
         return CatalogConverter.toModel(c, room, furniture);
     }
 
+    @Transactional
     public void deleteCatalog(int id, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
