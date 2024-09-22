@@ -130,7 +130,7 @@ public class RoomServiceTest {
     void testGetRoomAll() {
         
         when(jwtService.extractRole(token.getToken())).thenReturn(Role.ADMIN);
-        when(roomRepository.findAll()).thenReturn(java.util.List.of(room));
+        when(roomRepository.findRoomAll()).thenReturn(java.util.List.of(room));
 
         Iterable<RoomModel> rms = roomService.getRoomAll(token);
 

@@ -192,7 +192,7 @@ class CatalogServiceTest {
         when(catalogRepository.findByRoomId(room.getRoomID())).thenReturn(java.util.List.of(catalog));
         // when(roomRepository.findById(room.getRoomID())).thenReturn(Optional.of(room));
         when(furnitureRepository.findById(furniture.getFurID())).thenReturn(Optional.of(furniture));
-        when(roomRepository.findAll()).thenReturn(java.util.List.of(room));
+        when(roomRepository.findRoomAll()).thenReturn(java.util.List.of(room));
 
         Iterable<RoomCatalog> result = catalogService.getCatalogAll(token);
 
@@ -200,7 +200,7 @@ class CatalogServiceTest {
         assertEquals(java.util.List.of(roomCatalog), result);
 
         // verify(catalogRepository).findAll();
-        verify(roomRepository).findAll();
+        // verify(roomRepository).findRoomAll();
         verify(furnitureRepository).findById(furniture.getFurID());
     }
 
