@@ -35,14 +35,14 @@ public class CatalogController {
         return new ResponseBody<>(HttpStatus.OK.value(), "Catalog found", cats);
     }
 
-    @GetMapping("/catalog/{id}")
-    public ResponseBody<RoomCatalog> getCatalogById(@RequestHeader("Authorization") String token, @PathVariable int id) {
-        token = token.substring(7); 
-        JwtToken jwtToken = JwtToken.builder().token(token).build();
+    // @GetMapping("/catalog/{id}")
+    // public ResponseBody<RoomCatalog> getCatalogById(@RequestHeader("Authorization") String token, @PathVariable int id) {
+    //     token = token.substring(7); 
+    //     JwtToken jwtToken = JwtToken.builder().token(token).build();
 
-        RoomCatalog cat = catalogService.getCatalogById(id, jwtToken);
-        return new ResponseBody<>(HttpStatus.OK.value(), "Catalog found", cat);
-    }
+    //     RoomCatalog cat = catalogService.getCatalogById(id, jwtToken);
+    //     return new ResponseBody<>(HttpStatus.OK.value(), "Catalog found", cat);
+    // }
 
     @GetMapping("/catalog/room/{roomId}")
     public ResponseBody<RoomCatalog> getCatalogByRoomId(@RequestHeader("Authorization") String token, @PathVariable int roomId) {

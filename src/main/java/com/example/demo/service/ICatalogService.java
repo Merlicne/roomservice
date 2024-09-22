@@ -7,7 +7,7 @@ import com.example.demo.model.RoomCatalog;
 
 public interface ICatalogService {
     public CatalogResponse createCatalog(CatalogRequest catalogModel, JwtToken token);
-    public RoomCatalog getCatalogById(int id, JwtToken token);
+    // public RoomCatalog getCatalogById(int id, JwtToken token);
     public Iterable<RoomCatalog> getCatalogAll(JwtToken token);
     public CatalogResponse updateCatalog(int id, CatalogRequest catalogModel, JwtToken token);
     public void deleteCatalog(int id, JwtToken token);
