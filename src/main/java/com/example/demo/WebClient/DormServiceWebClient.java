@@ -1,11 +1,13 @@
 package com.example.demo.WebClient;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.demo.model.BuildingModel;
 import com.example.demo.model.JwtToken;
 import com.example.demo.model.ResponseBody;
+import com.example.demo.model.RoomModel;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +23,7 @@ public class DormServiceWebClient implements IDormService {
                 .uri("/building/{buildingId}", buildingId)
                 .headers(headers -> headers.setBearerAuth(token.getToken()))
                 .retrieve()
-                .bodyToMono(ResponseBody.class)
+                .bodyToMono(new ParameterizedTypeReference<ResponseBody<BuildingModel>>() {})
                 .block();
 
         return response.getData();
