@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.WebClient.DormServiceWebClient;
 import com.example.demo.entity.Room;
+import com.example.demo.enumerate.RentStatus;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.middleware.JwtService;
 import com.example.demo.model.JwtToken;
@@ -35,7 +36,9 @@ public class RoomService implements IRoomService {
 
         dormService.getBuildingById(roomModel.getBuildingID(), token);
         RoomValidator.validateRoom(roomModel);
-        Room r = roomRepository.save(RoomConverter.toEntity(roomModel));
+        Room room = RoomConverter.toEntity(roomModel);
+        room.setIsRent(RentStatus.NOT_RENTED);
+        Room r = roomRepository.save(room);
         return RoomConverter.toModel(r);
     }
 

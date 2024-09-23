@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,6 +18,8 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.example.demo.enumerate.RentStatus;
 @Entity
 @Table(name = "Rooms")
 @AllArgsConstructor
@@ -39,6 +43,11 @@ public class Room {
     @Column(name = "roomPrice")
     private int roomPrice;
 
+    // 1:rent, 2:not rent
+    @Column(name = "isRent")
+    @Enumerated(EnumType.STRING)
+    private RentStatus isRent;
+
     @CreationTimestamp
     @Column(name = "createdAt")
     private LocalDateTime createdAt;
@@ -50,5 +59,5 @@ public class Room {
     @Column(name = "deletedAt")
     private LocalDateTime deletedAt;
 
-
+    
 }
