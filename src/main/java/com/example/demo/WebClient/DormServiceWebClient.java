@@ -1,5 +1,7 @@
 package com.example.demo.WebClient;
 
+import java.util.Optional;
+
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -7,7 +9,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.example.demo.model.BuildingModel;
 import com.example.demo.model.JwtToken;
 import com.example.demo.model.ResponseBody;
-import com.example.demo.model.RoomModel;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,7 +18,7 @@ public class DormServiceWebClient implements IDormService {
     private final WebClient webClient;
 
     
-    public BuildingModel getBuildingById(int buildingId, JwtToken token) {
+    public Optional<BuildingModel> getBuildingById(int buildingId, JwtToken token) {
     
         ResponseBody<BuildingModel> response = webClient.get()
                 .uri("/building/{buildingId}", buildingId)
@@ -25,7 +26,9 @@ public class DormServiceWebClient implements IDormService {
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<ResponseBody<BuildingModel>>() {})
                 .block();
-
-        return response.getData();
+        if ((response.getStatus() != 200 && response.getStatus() != 201) || response.getData() == null) {
+            return Optional.empty();
+        }
+        return Optional.of(response.getData());
     }
 }

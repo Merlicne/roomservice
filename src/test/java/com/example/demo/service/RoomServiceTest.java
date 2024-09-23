@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
+
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -83,7 +86,7 @@ public class RoomServiceTest {
     void testCreateRoom() {
         when(jwtService.extractRole(token.getToken())).thenReturn(Role.ADMIN);
         when(roomRepository.save(room)).thenReturn(room);
-        when(dormService.getBuildingById(1, token)).thenReturn(buildingModel);
+        when(dormService.getBuildingById(1, token)).thenReturn(Optional.of(buildingModel));
 
         RoomModel rm = roomService.createRoom(roomModel, token);
 
@@ -93,7 +96,7 @@ public class RoomServiceTest {
 
     @Test
     void testCreateRoomInvalid(){
-        when(dormService.getBuildingById(1, token)).thenReturn(buildingModel);
+        when(dormService.getBuildingById(1, token)).thenReturn(Optional.of(buildingModel));
         when(jwtService.extractRole(token.getToken())).thenReturn(Role.ADMIN);
 
         roomModel.setRoomNo(null);
