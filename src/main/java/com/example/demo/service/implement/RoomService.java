@@ -37,7 +37,7 @@ public class RoomService implements IRoomService {
         dormService.getBuildingById(roomModel.getBuildingID(), token);
         RoomValidator.validateRoom(roomModel);
         Room room = RoomConverter.toEntity(roomModel);
-        room.setIsRent(RoomStatus.NOT_RENTED);
+        room.setRoomStatus(RoomStatus.NOT_RENTED);
         Room r = roomRepository.save(room);
         return RoomConverter.toModel(r);
     }

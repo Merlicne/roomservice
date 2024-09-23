@@ -46,7 +46,7 @@ public class Room {
     // 1:rent, 2:not rent
     @Column(name = "isRent")
     @Enumerated(EnumType.STRING)
-    private RoomStatus isRent;
+    private RoomStatus roomStatus;
 
     @CreationTimestamp
     @Column(name = "createdAt")

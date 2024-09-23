@@ -54,7 +54,7 @@ public class RoomServiceTest {
             .roomID(0)
             .roomNo("105")
             .roomPrice(4500)
-            .isRent(RoomStatus.NOT_RENTED)
+            .roomStatus(RoomStatus.NOT_RENTED)
             .build();
 
         room = Room.builder()
@@ -62,7 +62,7 @@ public class RoomServiceTest {
             .roomID(0)
             .roomNo("105")
             .roomPrice(4500)
-            .isRent(RoomStatus.NOT_RENTED)
+            .roomStatus(RoomStatus.NOT_RENTED)
             .build();
 
         token = JwtToken.builder()

@@ -18,7 +18,7 @@ public class RoomModel {
     private int buildingID;
     private String roomNo;
     private int roomPrice;
-    private RoomStatus isRent;
+    private RoomStatus roomStatus;
     private LocalDateTime createdAt;
     private LocalDateTime deletedAt;
     private LocalDateTime updatedAt;
