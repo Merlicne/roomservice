@@ -66,7 +66,9 @@ public class RoomService implements IRoomService {
         RoomValidator.validateRoom(roomModel);
         Room r = RoomConverter.toEntity(roomModel);
         r.setCreatedAt(room.getCreatedAt());
-        r.setRoomStatus(room.getRoomStatus());
+        if (r.getRoomStatus() == null) {
+            r.setRoomStatus(room.getRoomStatus());
+        }
         r = roomRepository.save(r);
 
         return RoomConverter.toModel(r);
