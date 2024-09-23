@@ -84,11 +84,15 @@ public class CatalogService implements ICatalogService {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
 
+        Catalog oldCatalog = catalogRepository.findById(id).orElseThrow(() -> new NotFoundException("Catalog not found"));
         Room room = roomRepository.findById(catalogModel.getRoomID()).orElseThrow(() -> new NotFoundException("Room not found"));
         Furniture furniture = furnitureRepository.findById(catalogModel.getFurnitureID()).orElseThrow(() -> new NotFoundException("Furniture not found"));
         
         CatalogValidator.validateCatalog(catalogModel);
-        Catalog c = catalogRepository.save(CatalogConverter.toEntity(catalogModel));
+        Catalog c = CatalogConverter.toEntity(catalogModel);
+        c.setCreatedAt(oldCatalog.getCreatedAt());
+        c.setDeletedAt(oldCatalog.getDeletedAt());
+        c = catalogRepository.save(c);
         return CatalogConverter.toModel(c, room, furniture);
     }
 
