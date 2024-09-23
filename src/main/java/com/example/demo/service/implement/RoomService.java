@@ -35,7 +35,7 @@ public class RoomService implements IRoomService {
         RoleValidation.allowRoles(role, Role.ADMIN);
 
         RoomValidator.validateRoom(roomModel);
-        dormService.getBuildingById(roomModel.getBuildingID(), token).orElseThrow(() -> new NotFoundException("Building not found"));
+        dormService.getBuildingById(roomModel.getBuildingId(), token).orElseThrow(() -> new NotFoundException("Building not found"));
         Room room = RoomConverter.toEntity(roomModel);
         room.setRoomStatus(RoomStatus.NOT_RENTED);
         Room r = roomRepository.save(room);
