@@ -34,8 +34,8 @@ public class RoomService implements IRoomService {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
 
-        dormService.getBuildingById(roomModel.getBuildingID(), token).orElseThrow(() -> new NotFoundException("Building not found"));
         RoomValidator.validateRoom(roomModel);
+        dormService.getBuildingById(roomModel.getBuildingID(), token).orElseThrow(() -> new NotFoundException("Building not found"));
         Room room = RoomConverter.toEntity(roomModel);
         room.setRoomStatus(RoomStatus.NOT_RENTED);
         Room r = roomRepository.save(room);

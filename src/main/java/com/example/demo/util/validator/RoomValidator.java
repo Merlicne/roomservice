@@ -7,13 +7,13 @@ import com.example.demo.model.RoomModel;
 
 public class RoomValidator {
     public static void validateRoomId(int id) {
-        if (id < 0) {
+        if (id <= 0) {
             throw new BadRequestException("Room ID must be greater than 0");
         }
     }
 
     public static void validateBuildingId(int id) {
-        if (id < 0) {
+        if (id <= 0) {
             throw new BadRequestException("Building ID must be greater than 0");
         }
     }

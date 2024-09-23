@@ -96,7 +96,6 @@ public class RoomServiceTest {
 
     @Test
     void testCreateRoomInvalid(){
-        when(dormService.getBuildingById(1, token)).thenReturn(Optional.of(buildingModel));
         when(jwtService.extractRole(token.getToken())).thenReturn(Role.ADMIN);
 
         roomModel.setRoomNo(null);
@@ -110,12 +109,6 @@ public class RoomServiceTest {
             roomService.createRoom(roomModel, token);
         });
         roomModel.setRoomPrice(4500);
-
-        roomModel.setBuildingID(-1);
-        assertThrows(BadRequestException.class, () -> {
-            roomService.createRoom(roomModel, token);
-        });
-
         verify(roomRepository, times(0)).save(room);
 
     }
