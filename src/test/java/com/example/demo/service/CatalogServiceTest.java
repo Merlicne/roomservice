@@ -220,6 +220,7 @@ class CatalogServiceTest {
         when(roomRepository.findById(room.getRoomID())).thenReturn(Optional.of(room));
         when(furnitureRepository.findById(furniture.getFurID())).thenReturn(Optional.of(furniture));
         when(catalogRepository.save(any(Catalog.class))).thenReturn(catalog);
+        when(catalogRepository.findById(catalog.getId())).thenReturn(Optional.of(catalog));
 
         CatalogResponse result = catalogService.updateCatalog(1, catalogRequest, token);
 
