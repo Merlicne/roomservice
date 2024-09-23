@@ -22,13 +22,13 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class RoomService implements IRoomService {
 
     private final RoomRepository roomRepository;
     private final DormServiceWebClient dormService;
     private final JwtService jwtService;
 
-    @Transactional
     public RoomModel createRoom(RoomModel roomModel, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
@@ -54,7 +54,6 @@ public class RoomService implements IRoomService {
         return RoomConverter.toModel(roomRepository.findRoomAll());
     }
 
-    @Transactional
     public RoomModel updateRoom(int id, RoomModel roomModel, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
@@ -69,8 +68,7 @@ public class RoomService implements IRoomService {
 
         return RoomConverter.toModel(r);
     }
-     
-    @Transactional
+
     public void deleteRoom(int id, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);

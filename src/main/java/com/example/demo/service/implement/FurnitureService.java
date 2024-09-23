@@ -21,11 +21,11 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class FurnitureService implements IFurnitureService {
     private final FurnitureRepository furnitureRepository;
     private final JwtService jwtService;
 
-    @Transactional
     public FurnitureModel createFurniture(FurnitureModel furnitureModel, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
@@ -51,7 +51,6 @@ public class FurnitureService implements IFurnitureService {
         return FurnitureConverter.toModel(furs);
     }
 
-    @Transactional
     public FurnitureModel updateFurniture(int id, FurnitureModel furnitureModel, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
@@ -64,8 +63,7 @@ public class FurnitureService implements IFurnitureService {
         fur = furnitureRepository.save(fur);
         return FurnitureConverter.toModel(fur);
     }
-     
-    @Transactional
+    
     public void deleteFurniture(int id, JwtToken token) {
         Role role = jwtService.extractRole(token.getToken());
         RoleValidation.allowRoles(role, Role.ADMIN);
