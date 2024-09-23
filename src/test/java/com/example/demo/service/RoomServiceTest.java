@@ -16,7 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.demo.WebClient.DormServiceWebClient;
 import com.example.demo.entity.Room;
-import com.example.demo.enumerate.RentStatus;
+import com.example.demo.enumerate.RoomStatus;
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.middleware.JwtService;
 import com.example.demo.model.BuildingModel;
@@ -54,7 +54,7 @@ public class RoomServiceTest {
             .roomID(0)
             .roomNo("105")
             .roomPrice(4500)
-            .isRent(RentStatus.NOT_RENTED)
+            .isRent(RoomStatus.NOT_RENTED)
             .build();
 
         room = Room.builder()
@@ -62,7 +62,7 @@ public class RoomServiceTest {
             .roomID(0)
             .roomNo("105")
             .roomPrice(4500)
-            .isRent(RentStatus.NOT_RENTED)
+            .isRent(RoomStatus.NOT_RENTED)
             .build();
 
         token = JwtToken.builder()

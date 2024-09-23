@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.example.demo.enumerate.RentStatus;
+import com.example.demo.enumerate.RoomStatus;
 @Entity
 @Table(name = "Rooms")
 @AllArgsConstructor
@@ -46,7 +46,7 @@ public class Room {
     // 1:rent, 2:not rent
     @Column(name = "isRent")
     @Enumerated(EnumType.STRING)
-    private RentStatus isRent;
+    private RoomStatus isRent;
 
     @CreationTimestamp
     @Column(name = "createdAt")

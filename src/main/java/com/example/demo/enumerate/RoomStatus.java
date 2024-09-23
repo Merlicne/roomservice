@@ -1,5 +1,5 @@
 package com.example.demo.enumerate;
 
-public enum RentStatus {
+public enum RoomStatus {
     RENTED, NOT_RENTED
 }
