@@ -53,7 +53,7 @@ public class RoomServiceTest {
     @BeforeEach
     void setUp() {
         roomModel = RoomModel.builder()
-            .buildingId(1)
+            .buildingID(1)
             .roomID(0)
             .roomNo("105")
             .roomPrice(4500)

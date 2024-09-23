@@ -11,7 +11,7 @@ public class RoomConverter {
     public static RoomModel toModel(Room entity) {
         return RoomModel.builder()
                 .roomID(entity.getRoomID())
-                .buildingId(entity.getBuildingID())
+                .buildingID(entity.getBuildingID())
                 .roomNo(entity.getRoomNo())
                 .roomPrice(entity.getRoomPrice())
                 .roomStatus(entity.getRoomStatus())
@@ -24,7 +24,7 @@ public class RoomConverter {
     public static Room toEntity(RoomModel model) {
         return Room.builder()
                 .roomID(model.getRoomID())
-                .buildingID(model.getBuildingId())
+                .buildingID(model.getBuildingID())
                 .roomNo(model.getRoomNo())
                 .roomPrice(model.getRoomPrice())
                 .roomStatus(model.getRoomStatus())

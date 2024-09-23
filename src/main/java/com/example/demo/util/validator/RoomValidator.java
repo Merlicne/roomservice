@@ -45,7 +45,7 @@ public class RoomValidator {
 
     public static void validateRoom(RoomModel room) {
         // validateRoomId(room.getRoomID());
-        validateBuildingId(room.getBuildingId());
+        validateBuildingId(room.getBuildingID());
         validateRoomNo(room.getRoomNo());
         validateRoomPrice(room.getRoomPrice());
         // validateCreatedAt(room.getCreatedAt());

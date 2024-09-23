@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RoomModel {
     private int roomID ;
-    private int buildingId;
+    private int buildingID;
     private String roomNo;
     private int roomPrice;
     private RoomStatus roomStatus;
