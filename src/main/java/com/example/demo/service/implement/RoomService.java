@@ -62,7 +62,7 @@ public class RoomService implements IRoomService {
         RoleValidation.allowRoles(role, Role.ADMIN);
 
         Room room = roomRepository.findById(id).orElseThrow(() -> new NotFoundException("Room not found"));
-
+        roomModel.setRoomID(id);
         RoomValidator.validateRoom(roomModel);
         Room r = RoomConverter.toEntity(roomModel);
         r.setCreatedAt(room.getCreatedAt());
